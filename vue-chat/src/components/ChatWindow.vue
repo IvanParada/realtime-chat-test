@@ -15,7 +15,7 @@ const chat = useChatStore();
       <div class="flex items-center gap-3">
         <div class="flex flex-col">
           <h1 class="text-xl font-bold">Vue Chat</h1>
-          <div className="flex items-center gap-1">
+          <div class="flex items-center gap-1">
             <input
               type="text"
               v-model="chat.username"

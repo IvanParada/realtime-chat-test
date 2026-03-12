@@ -1,18 +1,24 @@
 <script setup>
-import { ref, watch, nextTick } from "vue";
+import { ref, watch, nextTick, onMounted } from "vue";
 import { useChatStore } from "../stores/chatStore.js";
 
 const chat = useChatStore();
 const bottomRef = ref(null);
 
+const scrollToBottom = async (behavior = "smooth") => {
+  await nextTick();
+  if (bottomRef.value) {
+    bottomRef.value.scrollIntoView({ behavior });
+  }
+};
+
+onMounted(() => {
+  scrollToBottom("smooth");
+});
+
 watch(
   () => chat.messages.length,
-  async () => {
-    await nextTick();
-    if (bottomRef.value) {
-      bottomRef.value.scrollIntoView({ behavior: "smooth" });
-    }
-  },
+  () => scrollToBottom("smooth"),
 );
 </script>
 
